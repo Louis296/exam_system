@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     User getUserByUserIdAndPassword(String id,String pd);
+    User getUserByUserId(String id);
 }

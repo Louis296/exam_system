@@ -26,4 +26,9 @@ public class UserController {
         return userService.userLogin(userLoginReq.getUserId(),userLoginReq.getPassword());
     }
 
+    @PostMapping("/create")
+    String userCreate(){
+        return "success";
+    }
+
 }

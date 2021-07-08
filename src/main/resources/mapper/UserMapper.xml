@@ -14,5 +14,8 @@
     <select id="getUserByUserIdAndPassword" parameterType="java.lang.String" resultMap="userResult">
         select * from user where user_id=#{id} and password=#{pd};
     </select>
+    <select id="getUserByUserId" parameterType="java.lang.String" resultMap="userResult">
+        select * from user where user_id=#{id};
+    </select>
 
 </mapper>
