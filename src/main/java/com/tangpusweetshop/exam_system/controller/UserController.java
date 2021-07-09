@@ -2,6 +2,7 @@ package com.tangpusweetshop.exam_system.controller;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tangpusweetshop.exam_system.model.req.UserLoginReq;
+import com.tangpusweetshop.exam_system.model.resp.Resp;
 import com.tangpusweetshop.exam_system.model.resp.UserLoginResp;
 import com.tangpusweetshop.exam_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,10 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    String userCreate(){
-        return "success";
+    Resp userCreate(){
+        Resp resp=new Resp();
+        resp.setStatus("success");
+        return resp;
     }
 
 }

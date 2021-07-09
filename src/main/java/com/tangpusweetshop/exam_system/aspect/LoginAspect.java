@@ -8,7 +8,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.tangpusweetshop.exam_system.ExamSystemApplication;
 import com.tangpusweetshop.exam_system.mapper.UserMapper;
 import com.tangpusweetshop.exam_system.model.User;
+import com.tangpusweetshop.exam_system.model.resp.Resp;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,25 +32,31 @@ public class LoginAspect {
         this.userMapper=userMapper;
     }
 
-    @Before("execution(* com.tangpusweetshop.exam_system.controller..*.*(..))  && !execution(* com.tangpusweetshop.exam_system.controller.UserController.userLogin(..)) ")
-    public void doLoginCheck(JoinPoint joinPoint){
+    @Around("execution(* com.tangpusweetshop.exam_system.controller..*.*(..))  && !execution(* com.tangpusweetshop.exam_system.controller.UserController.userLogin(..)) ")
+    public Object doLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+        Object result;
         try{
-            Object[] obj=joinPoint.getArgs();
+            Object[] args=joinPoint.getArgs();
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             String token = request.getHeader("Authorize");
             JWTVerifier jwtVerifier=JWT.require(Algorithm.HMAC256(ExamSystemApplication.secret)).build();
             DecodedJWT decodedJWT=jwtVerifier.verify(token);
             String userId=decodedJWT.getClaim("aud").asString();
             User user=userMapper.getUserByUserId(userId);
-            for (Object argParam:obj){
+            for (Object argParam:args){
                 if (argParam instanceof User){
                     User userParam=(User) argParam;
                     userParam.setType(user.getType());
                     userParam.setName(user.getName());
                 }
             }
+            result=joinPoint.proceed(args);
         }catch (Exception e){
-            e.printStackTrace();
+            Resp resp=new Resp();
+            resp.setError("No jwt or jwt invalid");
+            resp.setStatus("Error");
+            result= resp;
         }
+        return result;
     }
 }
