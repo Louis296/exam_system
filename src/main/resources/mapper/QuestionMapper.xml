@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangpusweetshop.exam_system.mapper.QuestionMapper">
+    <resultMap id="questionResult" type="com.tangpusweetshop.exam_system.model.Question">
+        <id column="id" property="id"/>
+        <result column="question_id" property="questionId"/>
+        <result column="question" property="question"/>
+        <result column="answer" property="answer"/>
+        <result column="chapter_id" property="chapterId"/>
+        <result column="chapter_title" property="chapterTitle"/>
+        <result column="chapter_key" property="chapterKey"/>
+        <result column="level" property="level"/>
+        <result column="keyword" property="keyword"/>
+    </resultMap>
+    <insert id="createQuestion" parameterType="com.tangpusweetshop.exam_system.model.Question">
+        insert into question(question_id, question, answer, chapter_id, chapter_title, chapter_key, level, keyword)
+        values (#{questionId},#{question},#{answer},#{chapterId},#{chapterTitle},#{chapterKey},#{level},#{keyword});
+    </insert>
+    <update id="disableQuestionByQuestionId" parameterType="java.lang.String">
+        update question set question.status=1 where question_id=#{id};
+    </update>
+    <update id="enableQuestionByQuestionId" parameterType="java.lang.String">
+        update question set question.status=0 where question_id=#{id};
+    </update>
+    <delete id="deleteQuestionByQuestionId" parameterType="java.lang.String">
+        delete from question where question_id=#{id};
+    </delete>
+    <update id="updateQuestion" parameterType="com.tangpusweetshop.exam_system.model.Question">
+        update question set question=#{question},answer=#{answer},chapter_id=#{chapterId},chapter_title=#{chapterTitle},
+                            chapter_key=#{chapterKey},level=#{level},keyword=#{keyword} where question_id=#{questionId};
+    </update>
+    <select id="listQuestionAll" parameterType="java.lang.Integer" resultMap="questionResult">
+        select * from question limit #{limit} offset #{offset};
+    </select>
+    <select id="getQuestionByQuestionId" parameterType="java.lang.String" resultMap="questionResult">
+        select * from question where question_id=#{id};
+    </select>
+    <select id="listQuestionDisable" parameterType="java.lang.Integer" resultMap="questionResult">
+        select * from question where status=1 limit #{limit} offset #{offset};
+    </select>
+</mapper>
