@@ -17,5 +17,18 @@
     <select id="getUserByUserId" parameterType="java.lang.String" resultMap="userResult">
         select * from user where user_id=#{id};
     </select>
-
+    <insert id="createUser" parameterType="com.tangpusweetshop.exam_system.model.User" useGeneratedKeys="true">
+        insert into user(user_id, password, type, name, code, grade, major)
+        values (#{userId},#{password},#{type},#{name},#{code},#{grade},#{major});
+    </insert>
+    <delete id="deleteUserByUserId" parameterType="java.lang.String">
+        delete from user where user_id=#{id};
+    </delete>
+    <select id="getUserList" parameterType="java.lang.Integer" resultMap="userResult">
+        select * from user limit #{limit} offset #{offset};
+    </select>
+    <update id="updateUser" parameterType="com.tangpusweetshop.exam_system.model.User">
+        update user set user.password=#{password},user.type=#{type},user.name=#{name},
+                        user.code=#{code},user.grade=#{grade},user.major=#{major} where user_id=#{userId};
+    </update>
 </mapper>
