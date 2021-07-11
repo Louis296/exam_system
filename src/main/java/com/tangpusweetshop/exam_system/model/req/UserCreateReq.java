@@ -1,7 +1,7 @@
 package com.tangpusweetshop.exam_system.model.req;
 
 public class UserCreateReq {
-    String userID;
+    String userId;
     String password;
     String type;
     String name;
@@ -17,12 +17,12 @@ public class UserCreateReq {
         this.grade = grade;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {

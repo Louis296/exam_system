@@ -12,6 +12,8 @@ import com.tangpusweetshop.exam_system.model.resp.UserLoginResp;
 import com.tangpusweetshop.exam_system.model.resp.UserUpdateResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService{
     public UserLoginResp userLogin(String userId, String password) {
         UserLoginResp resp=new UserLoginResp();
         try{
-            User user=userMapper.getUserByUserIdAndPassword(userId,password);
+            User user=userMapper.getUserByUserIdAndPassword(userId,DigestUtils.md5DigestAsHex(password.getBytes()));
             resp.setStatus("Success");
             resp.setType(user.getType());
             String token= JWT.create().withAudience(user.getUserId()).sign(Algorithm.HMAC256(ExamSystemApplication.secret));
@@ -42,14 +44,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public Resp userCreate(UserCreateReq req) {
         Resp resp=new Resp();
-        if (!(req.getType().equals("Principal")||req.getType().equals("Student"))){
+        if (!(req.getType().equals("principal")||req.getType().equals("student"))){
             resp.setStatus("Error");
             resp.setError("Invalid user type");
             return resp;
         }
         User user=new User();
-        user.setUserId(req.getUserID());
-        user.setPassword(req.getPassword());
+        user.setUserId(req.getUserId());
+        user.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         user.setType(req.getType());
         user.setName(req.getName());
         user.setMajor(req.getMajor());
@@ -92,7 +94,7 @@ public class UserServiceImpl implements UserService{
             return resp;
         }
         User user=new User();
-        user.setUserId(req.getUserID());
+        user.setUserId(req.getUserId());
         user.setPassword(req.getPassword());
         user.setType(req.getType());
         user.setName(req.getName());
