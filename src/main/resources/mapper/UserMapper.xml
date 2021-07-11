@@ -25,7 +25,7 @@
         delete from user where user_id=#{id};
     </delete>
     <select id="getUserList" parameterType="java.lang.Integer" resultMap="userResult">
-        select * from user limit #{limit} offset #{offset};
+        select * from user order by id desc limit #{limit} offset #{offset};
     </select>
     <update id="updateUser" parameterType="com.tangpusweetshop.exam_system.model.User">
         update user set user.password=#{password},user.type=#{type},user.name=#{name},

@@ -1,6 +1,8 @@
 package com.tangpusweetshop.exam_system.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Question {
 
   private long id;

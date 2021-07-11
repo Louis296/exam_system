@@ -30,7 +30,7 @@
                             chapter_key=#{chapterKey},level=#{level},keyword=#{keyword} where question_id=#{questionId};
     </update>
     <select id="listQuestionAll" parameterType="java.lang.Integer" resultMap="questionResult">
-        select * from question limit #{limit} offset #{offset};
+        select * from question order by id desc limit #{limit} offset #{offset};
     </select>
     <select id="getQuestionByQuestionId" parameterType="java.lang.String" resultMap="questionResult">
         select * from question where question_id=#{id};

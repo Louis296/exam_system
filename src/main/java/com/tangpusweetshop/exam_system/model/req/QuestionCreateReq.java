@@ -7,6 +7,15 @@ public class QuestionCreateReq {
     String chapterTitle;
     String chapterKey;
     String level;
+    String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getQuestion() {
         return question;
@@ -55,15 +64,4 @@ public class QuestionCreateReq {
     public void setLevel(String level) {
         this.level = level;
     }
-
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
-    }
-
-    String keyWord;
-
 }

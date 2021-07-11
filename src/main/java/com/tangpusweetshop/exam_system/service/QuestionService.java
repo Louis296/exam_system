@@ -11,4 +11,5 @@ public interface QuestionService {
     Resp questionGet(String questionId);
     Resp questionDisableList(int offset,int limit);
     Resp questionDeleteVerify(String questionId,int submit);
+    Resp questionAnswer(String questionId);
 }

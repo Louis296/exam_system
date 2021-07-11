@@ -3,11 +3,20 @@ package com.tangpusweetshop.exam_system.model.resp;
 public class QuestionResp extends Resp{
     String questionId;
     String question;
+    String answer;
     String chapterId;
     String chapterTitle;
     String chapterKey;
     Long level;
     String keyword;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public String getQuestionId() {
         return questionId;
