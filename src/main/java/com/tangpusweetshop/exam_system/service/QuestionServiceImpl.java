@@ -27,7 +27,7 @@ public class QuestionServiceImpl implements QuestionService{
     public Resp questionCreate(QuestionCreateReq req) {
         Question question=reqToQuestion(req);
         Date data=new Date();
-        SimpleDateFormat ft=new SimpleDateFormat("yyyymmddhhmmss");
+        SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddHHmmss");
         question.setQuestionId("Q"+ft.format(data));
         questionMapper.createQuestion(question);
         QuestionResp resp=new QuestionResp();

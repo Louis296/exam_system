@@ -38,4 +38,19 @@
     <select id="listQuestionDisable" parameterType="java.lang.Integer" resultMap="questionResult">
         select * from question where status=1 limit #{limit} offset #{offset};
     </select>
+    <select id="getQuestionsWithTestCondition" resultMap="questionResult">
+        select * from question
+        <where>
+            <if test="level !=null">
+                level=#{level}
+            </if>
+            <if test="chapterTitle != null">
+                and chapter_title=#{chapterTitle}
+            </if>
+            <if test="chapterKey != null">
+                and chapter_key=#{chapterKey}
+            </if>
+        </where>
+        order by rand() limit #{number};
+    </select>
 </mapper>

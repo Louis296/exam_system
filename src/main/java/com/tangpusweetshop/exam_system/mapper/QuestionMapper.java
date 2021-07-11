@@ -15,4 +15,5 @@ public interface QuestionMapper {
     List<Question> listQuestionAll(int limit,int offset);
     Question getQuestionByQuestionId(String id);
     List<Question> listQuestionDisable(int limit,int offset);
+    List<Question> getQuestionsWithTestCondition(int number,int level,String chapterTitle,String chapterKey);
 }
