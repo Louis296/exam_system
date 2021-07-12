@@ -33,9 +33,9 @@ public class TestController {
 
     @GetMapping("/answer")
     Resp testAnswer(User user,@RequestParam(value = "TestID") String testId){
-        if (!(user.getType().equals("admin")||user.getType().equals("principal"))){
-            return getNoPermissionResp(user.getType());
-        }
+//        if (!(user.getType().equals("admin")||user.getType().equals("principal"))){
+//            return getNoPermissionResp(user.getType());
+//        }
         return testService.getTestAnswer(testId);
     }
 

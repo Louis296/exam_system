@@ -70,9 +70,9 @@ public class QuestionController {
 
     @GetMapping("/answer")
     Resp questionAnswer(User user,@RequestParam(value = "QuestionID") String questionId){
-        if (!(user.getType().equals("admin")||user.getType().equals("principal"))){
-            return getNoPermissionResp(user.getType());
-        }
+//        if (!(user.getType().equals("admin")||user.getType().equals("principal"))){
+//            return getNoPermissionResp(user.getType());
+//        }
         return questionService.questionAnswer(questionId);
     }
 
