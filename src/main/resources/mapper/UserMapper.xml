@@ -28,7 +28,7 @@
         select * from user order by id desc limit #{limit} offset #{offset};
     </select>
     <update id="updateUser" parameterType="com.tangpusweetshop.exam_system.model.User">
-        update user set user.password=#{password},user.type=#{type},user.name=#{name},
+        update user set user.type=#{type},user.name=#{name},
                         user.code=#{code},user.grade=#{grade},user.major=#{major} where user_id=#{userId};
     </update>
 </mapper>

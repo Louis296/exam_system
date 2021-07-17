@@ -55,9 +55,9 @@ public class TestServiceImpl implements TestService{
     @Override
     public Resp getTest(String testId) {
         List<Question> questionList=testMapper.getTestWithTestId(testId);
-        for(Question question:questionList){
-            question.setAnswer("");
-        }
+//        for(Question question:questionList){
+//            question.setAnswer("");
+//        }
         TestQuestionResp resp=new TestQuestionResp();
         resp.setList(questionList);
         resp.setStatus("Success");

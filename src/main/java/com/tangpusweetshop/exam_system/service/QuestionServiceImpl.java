@@ -62,9 +62,9 @@ public class QuestionServiceImpl implements QuestionService{
         List<Question> list= questionMapper.listQuestionAll(limit,limit*(offset-1));
         resp.setOffset(offset);
         resp.setLimit(limit);
-        for(Question question:list){
-            question.setAnswer("");
-        }
+//        for(Question question:list){
+//            question.setAnswer("");
+//        }
         resp.setList(list);
         resp.setStatus("Success");
         return resp;

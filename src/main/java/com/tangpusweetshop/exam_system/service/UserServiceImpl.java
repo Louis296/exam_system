@@ -88,14 +88,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public Resp userUpdate(UserCreateReq req) {
         UserUpdateResp resp=new UserUpdateResp();
-        if (!(req.getType().equals("Principal")||req.getType().equals("Student"))){
+        if (!(req.getType().equals("principal")||req.getType().equals("student"))){
             resp.setStatus("Error");
             resp.setError("Invalid user type");
             return resp;
         }
         User user=new User();
         user.setUserId(req.getUserId());
-        user.setPassword(req.getPassword());
+//        user.setPassword(req.getPassword());
         user.setType(req.getType());
         user.setName(req.getName());
         user.setMajor(req.getMajor());
