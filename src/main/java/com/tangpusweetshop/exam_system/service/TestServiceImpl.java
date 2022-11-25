@@ -7,6 +7,7 @@ import com.tangpusweetshop.exam_system.model.Question;
 import com.tangpusweetshop.exam_system.model.Test;
 import com.tangpusweetshop.exam_system.model.req.TestCreateReq;
 import com.tangpusweetshop.exam_system.model.resp.*;
+import com.tangpusweetshop.exam_system.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,7 @@ public class TestServiceImpl implements TestService{
                 req.getChapterKey()
         );
         List<Test> testRelations=new ArrayList<>();
-        Date data=new Date();
-        SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddHHmmss");
-        String testId="T"+ft.format(data);
+        String testId= CommonUtils.getInstance().generateTestId();
         for (Question question:questionList){
             Test test=new Test();
             test.setTestId(testId);
